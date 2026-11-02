@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sweet Seventeen 🌸</title>
+<meta name="theme-color" content="#f3e3f6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LATAR: awan, ranting sakura, kelopak jatuh -->
+<div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+<canvas id="bg"></canvas>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="fl">
+      <g fill="#ffcfe0" stroke="#ffb0cb" stroke-width=".6">
+        <ellipse cx="0" cy="-8" rx="5.5" ry="8"/>
+        <ellipse cx="0" cy="-8" rx="5.5" ry="8" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-8" rx="5.5" ry="8" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-8" rx="5.5" ry="8" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-8" rx="5.5" ry="8" transform="rotate(288)"/>
+      </g>
+      <circle r="2.6" fill="#f4c26e"/><circle r="1.1" fill="#e58a8a"/>
+    </g>
+    <g id="brg">
+      <path d="M-10 18 C60 40 120 14 170 66 S250 104 305 205" stroke="#8d6a6e" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M120 38 C140 62 150 72 186 80" stroke="#8d6a6e" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M200 86 C225 108 238 118 270 120" stroke="#8d6a6e" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <use href="#fl" transform="translate(38 30) scale(1.35)"/>
+      <use href="#fl" transform="translate(92 36) scale(1)"/>
+      <use href="#fl" transform="translate(148 58) scale(1.45)"/>
+      <use href="#fl" transform="translate(130 96) scale(.95)"/>
+      <use href="#fl" transform="translate(190 92) scale(1.25)"/>
+      <use href="#fl" transform="translate(232 138) scale(1.05)"/>
+      <use href="#fl" transform="translate(272 172) scale(1.3)"/>
+      <use href="#fl" transform="translate(68 8) scale(.8)"/>
+      <use href="#fl" transform="translate(178 46) scale(.8)"/>
+      <use href="#fl" transform="translate(262 122) scale(.85)"/>
+      <circle cx="108" cy="62" r="4" fill="#ff9fbd"/><circle cx="214" cy="116" r="3.5" fill="#ff9fbd"/><circle cx="20" cy="22" r="4" fill="#ff9fbd"/>
+    </g>
+  </defs>
+</svg>
+<svg class="branch left" viewBox="0 0 310 220" aria-hidden="true"><use href="#brg"/></svg>
+<svg class="branch right" viewBox="0 0 310 220" aria-hidden="true"><use href="#brg"/></svg>
+
+<canvas id="confetti"></canvas>
+<button id="musicBtn" class="music hidden" aria-label="Musik">♪</button>
+<div id="dots" class="dots hidden"></div>
+<button id="devNext" class="devnext hidden">⏭ lewati halaman (preview)</button>
+
+<!-- 1. COUNTDOWN -->
+<section class="stage active" id="s-gate">
+  <p class="eyebrow">✦ a special day is coming ✦</p>
+  <h1 class="script" id="gateTitle">Sweet Seventeen</h1>
+  <p class="sub" id="gateSub"></p>
+  <p class="date-chip" id="gateDate"></p>
+  <div class="count" id="count">
+    <div><b id="cd">00</b><span>Hari</span></div>
+    <div><b id="ch">00</b><span>Jam</span></div>
+    <div><b id="cm">00</b><span>Menit</span></div>
+    <div><b id="cs">00</b><span>Detik</span></div>
+  </div>
+  <p class="hint" id="gateHint">Sabar ya, kejutannya terbuka tepat di hari ulang tahunmu 🎀</p>
+  <button class="btn hidden" id="openGate">Buka Kejutan ✨</button>
+</section>
+
+<!-- 2. AMPLOP -->
+<section class="stage" id="s-envelope">
+  <p class="eyebrow">✦ sebuah surat untukmu ✦</p>
+  <div class="envelope" id="envelope" tabindex="0" role="button" aria-label="Buka amplop">
+    <div class="env-back"></div>
+    <div class="env-letter"><span class="script" id="envTo">For You</span></div>
+    <div class="env-front"></div>
+    <div class="env-flap"></div>
+    <div class="seal">♡</div>
+  </div>
+  <p class="hint">Ketuk amplopnya untuk membuka</p>
+</section>
+
+<!-- 3. SURAT -->
+<section class="stage" id="s-letter">
+  <h2 class="script big" id="letterTitle">Happy Birthday</h2>
+  <article class="paper">
+    <div class="paper-text" id="letterText"></div><span class="cursor"></span>
+  </article>
+  <div class="row">
+    <button class="btn ghost" id="skipType">Lewati</button>
+    <button class="btn hidden" id="letterNext">Lanjut 📖</button>
+  </div>
+</section>
+
+<!-- 4. DIARY RAHASIA -->
+<section class="stage" id="s-diary">
+  <p class="eyebrow">✦ rahasia kecil ✦</p>
+  <h2 class="script big">My Secret Diary</h2>
+  <div class="book" id="book" tabindex="0" role="button" aria-label="Buka diary">
+    <div class="book-inside"><div class="dpage" id="dpage"></div></div>
+    <div class="cover"><span class="script" id="coverText">Dear Kall</span><i class="lock">🔒</i></div>
+  </div>
+  <div class="dnav hidden" id="dnav">
+    <button class="btn ghost" id="dPrev" aria-label="Sebelumnya">‹</button>
+    <span id="dCount">1/5</span>
+    <button class="btn ghost" id="dNext" aria-label="Berikutnya">›</button>
+  </div>
+  <p class="hint" id="diaryHint">Ketuk buku untuk membuka kuncinya</p>
+  <button class="btn hidden" id="diaryDone">Lanjut 💜</button>
+</section>
+
+<!-- 5. 17 ALASAN -->
+<section class="stage" id="s-reasons">
+  <h2 class="script big">17 Alasan</h2>
+  <p class="sub">Ada 17 alasan kenapa kamu spesial. Ketuk satu per satu 💗</p>
+  <div class="hearts" id="hearts"></div>
+  <p class="hint"><span id="rCount">0</span>/17 terbuka</p>
+  <div class="row">
+    <button class="btn ghost" id="reasonSkip">Lewati</button>
+    <button class="btn hidden" id="reasonNext">Lanjut 📸</button>
+  </div>
+  <div class="reason-pop hidden" id="reasonPop"><div class="rcard"><small id="rNum"></small><p id="rText"></p><span>ketuk untuk menutup</span></div></div>
+</section>
+
+<!-- 6. GALERI -->
+<section class="stage" id="s-gallery">
+  <h2 class="script big">Our Memories</h2>
+  <p class="sub">Ketuk foto untuk memperbesar</p>
+  <div class="polaroids" id="polaroids"></div>
+  <button class="btn" id="galleryNext">Lanjut 💫</button>
+</section>
+
+<!-- 7. VIDEO (otomatis dilewati kalau tidak ada video) -->
+<section class="stage" id="s-video">
+  <h2 class="script big">A Moment For You</h2>
+  <div class="vframe"><video id="momentVideo" controls playsinline preload="metadata"></video></div>
+  <button class="btn" id="videoNext">Lanjut 🌸</button>
+</section>
+
+<!-- 8. DAZAI -->
+<section class="stage" id="s-dazai">
+  <p class="eyebrow">✦ karakter favoritmu ✦</p>
+  <h2 class="script big" id="dzTitle">Favorit Kamu</h2>
+  <div class="dz-frame"><div class="dz-img" id="dzImg"></div><span class="dz-tag" id="dzTag"></span></div>
+  <h3 class="dz-name" id="dzName"></h3>
+  <p class="sub" id="dzNote"></p>
+  <button class="btn" id="dzNext">Lanjut 🎂</button>
+</section>
+
+<!-- 9. KUE -->
+<section class="stage" id="s-cake">
+  <h2 class="script big">Make a Wish…</h2>
+  <p class="sub" id="cakeSub">Pejamkan mata, buat harapan, lalu tiup lilinnya 🕯️</p>
+  <div class="cake" id="cake">
+    <div class="candles">
+      <div class="candle"><i class="flame"></i><b>1</b></div>
+      <div class="candle"><i class="flame"></i><b>7</b></div>
+    </div>
+    <div class="tier t3"></div><div class="tier t2"></div><div class="tier t1"></div><div class="plate"></div>
+  </div>
+  <div class="row" id="blowRow">
+    <button class="btn" id="blow">Tiup Lilin 💨</button>
+    <button class="btn ghost" id="blowMic">🎤 Tiup lewat mikrofon</button>
+  </div>
+  <p class="hint hidden" id="micHint">Tiup ke arah mikrofon HP / laptop-mu…</p>
+  <button class="btn hidden" id="cakeNext">Lanjut 🌟</button>
+</section>
+
+<!-- 10. FLOATING WISHES -->
+<section class="stage" id="s-wishes">
+  <h2 class="script big">Floating Wishes</h2>
+  <p class="sub">Ketuk gelembung doa yang melayang 🫧</p>
+  <div class="sky" id="sky"></div>
+  <p class="hint"><span id="wCount">0</span> doa terbaca</p>
+  <div class="row">
+    <button class="btn ghost" id="wishSkip">Lewati</button>
+    <button class="btn hidden" id="wishNext">Lanjut 🎁</button>
+  </div>
+  <div class="reason-pop hidden" id="wishPop"><div class="rcard"><small>doa untukmu</small><p id="wText"></p><span>ketuk untuk menutup</span></div></div>
+</section>
+
+<!-- 11. KADO -->
+<section class="stage" id="s-gift">
+  <p class="eyebrow">✦ satu hal lagi ✦</p>
+  <h2 class="script big">Satu Hal Lagi…</h2>
+  <div class="gift" id="gift" tabindex="0" role="button" aria-label="Buka kado">
+    <div class="g-lid"><i></i></div><div class="g-box"><i></i></div><div class="g-glow"></div>
+  </div>
+  <p class="hint">Ketuk kadonya</p>
+</section>
+
+<!-- 12. PENUTUP -->
+<section class="stage" id="s-final">
+  <p class="eyebrow">✦ with all my love ✦</p>
+  <h1 class="script huge" id="finalTitle">Happy Sweet Seventeen</h1>
+  <p class="final-name" id="finalName"></p>
+  <div class="card">
+    <p id="finalMsg"></p>
+    <p class="sign" id="sign"></p>
+  </div>
+  <div class="row">
+    <a class="btn hidden" id="waBtn" target="_blank" rel="noopener">Balas ucapan 💬</a>
+    <button class="btn ghost" id="replay">Ulangi dari awal ↺</button>
+  </div>
+</section>
+
+<div class="lightbox hidden" id="lightbox"><figure><div id="lbImg"></div><figcaption id="lbCap"></figcaption></figure></div>
+<audio id="audio" loop preload="auto"></audio>
+
+<!-- urutan script jangan diubah -->
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
